@@ -1,0 +1,22 @@
+version: '3'
+services:
+    server:
+        build: ./server
+        image: server
+        volumes:
+            - ./output:/output
+        environment:
+            - REDIS_HOST=
+            - REDIS_QUEUE=doclist
+            - REDIS_PASSWORD=
+    client:
+        build: ./client
+        image: client
+        ports:
+            - 8000:8000
+        volumes:
+            - ./templates:/templates
+        environment:
+            - REDIS_HOST=
+            - REDIS_QUEUE=doclist
+            - REDIS_PASSWORD=
